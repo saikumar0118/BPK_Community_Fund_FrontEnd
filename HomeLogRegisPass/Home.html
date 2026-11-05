@@ -1972,26 +1972,11 @@
 
                             <div class="flex items-center justify-between mb-2">
 
-                                <label id="label-reset-identifier" class="block text-sm font-bold text-gray-300">Registered Member ID, Mobile, Email, or Name *</label>
+                                <label id="label-reset-identifier" class="block text-sm font-bold text-gray-300">Registered Member ID or Email *</label>
 
-                                <div class="flex items-center gap-3 text-xs">
-
-                                    <label class="flex items-center gap-1.5 text-gray-300 cursor-pointer font-semibold">
-
-                                        <input type="radio" name="reset-channel" value="Phone" checked onchange="onResetChannelChange('Phone')" class="text-amber-500 focus:ring-0">
-
-                                        <span>Mobile SMS</span>
-
-                                    </label>
-
-                                    <label class="flex items-center gap-1.5 text-gray-300 cursor-pointer font-semibold">
-
-                                        <input type="radio" name="reset-channel" value="Email" onchange="onResetChannelChange('Email')" class="text-amber-500 focus:ring-0">
-
-                                        <span>Email</span>
-
-                                    </label>
-
+                                                                <div class="flex items-center gap-1.5 text-xs font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20">
+                                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-amber-400"></i>
+                                    <span>Security: Email OTP Only</span>
                                 </div>
 
                             </div>
@@ -2000,9 +1985,9 @@
 
                                 <div class="relative flex items-center flex-1">
 
-                                    <i id="reset-channel-icon" data-lucide="phone" class="absolute left-4 text-gray-400 w-5 h-5"></i>
+                                    <i id="reset-channel-icon" data-lucide="mail" class="absolute left-4 text-gray-400 w-5 h-5"></i>
 
-                                    <input type="text" id="reset-identifier" class="w-full pl-12 pr-4 py-3.5 bg-[#111827] border-2 border-[#374151] rounded-xl font-semibold text-white focus:border-[#eea220] focus:outline-none transition" placeholder="Enter Member ID (e.g. PBK-M021), Mobile, Email, or Name" required>
+                                    <input type="text" id="reset-identifier" class="w-full pl-12 pr-4 py-3.5 bg-[#111827] border-2 border-[#374151] rounded-xl font-semibold text-white focus:border-[#eea220] focus:outline-none transition" placeholder="Enter your Member ID (e.g. PBK-M001) or Registered Email" required>
 
                                 </div>
 

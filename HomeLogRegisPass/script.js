@@ -1102,7 +1102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const userType = fieldId.startsWith('member') ? 'Member' : 'Admin';
 
-        const otpType = fieldId.includes('Phone') ? 'Phone' : 'Email';
+        const otpType = 'Email';
 
         const cleanVal = otpType === 'Phone' ? input.value.replace(/\D/g, '').slice(-10) : input.value.trim();
 
@@ -2810,50 +2810,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             resetPasswordOtpId = data.otp_id;
-
-            resetPasswordOtpVerified = true;
-
-
+            resetPasswordOtpVerified = false;
 
             const secOtp = document.getElementById('section-reset-otp');
-
             if (secOtp) secOtp.classList.remove('hidden');
 
-
-
             const badge = document.getElementById('otp-verified-badge');
+            if (badge) badge.classList.add('hidden');
 
-            if (badge) badge.classList.remove('hidden');
-
-
-
-            // Auto-populate 4 OTP input boxes with received code
-
-            const otpCodeStr = String(data.otp_code || '');
-
+            // Keep all 4 OTP input boxes blank for manual entry from email
             const otpInputs = document.querySelectorAll('.r-otp');
-
-            otpInputs.forEach((b, idx) => {
-
-                b.value = otpCodeStr[idx] || '';
-
+            otpInputs.forEach((b) => {
+                b.value = '';
                 b.disabled = false;
-
             });
+            if (otpInputs.length > 0) otpInputs[0].focus();
 
-
-
-            showMessage('pwd-status-message', `Verification OTP code: ${data.otp_code} (Sent to ${data.target})`, 'success');
-
-            showToast(`OTP Code: ${data.otp_code} (Auto-filled)`, 'success');
-
-
+            showMessage('pwd-status-message', `📬 4-digit verification code sent to your email (${data.target})! Please check your inbox and enter the code below.`, 'success');
+            showToast(`Verification code sent to your email (${data.target}). Please check your inbox.`, 'success');
 
             const msgEl = document.getElementById('msg-reset-otp');
-
-            if (msgEl) msgEl.innerText = `OTP code sent to ${data.target}. Valid for 10 minutes.`;
-
-
+            if (msgEl) msgEl.innerText = `📬 Verification code sent to ${data.target}. Please check your email and enter the 4 digits below.`;
 
             let timeLeft = 60;
 
