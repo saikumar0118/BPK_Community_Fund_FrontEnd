@@ -3746,7 +3746,7 @@ function togglePasswordEdit() {
 
                 if (otpMsg) {
 
-                    otpMsg.innerHTML = `OTP sent to +91 ${data.phone}. Code: <strong class="text-amber-900 dark:text-amber-200">${data.otp_code}</strong>`;
+                    otpMsg.innerHTML = `OTP sent to +91 ${data.phone}. Please enter code below.`;
 
                 }
 
@@ -3754,13 +3754,13 @@ function togglePasswordEdit() {
 
                 if (codeInput) {
 
-                    codeInput.value = data.otp_code || '';
+                    codeInput.value = '';
 
                     codeInput.focus();
 
                 }
 
-                showToast(`Verification code sent: ${data.otp_code}`, 'success');
+                showToast(`Verification code sent to your mobile.`, 'success');
 
             } catch (err) {
 
@@ -4026,7 +4026,7 @@ function togglePasswordEdit() {
 
                 if (otpMsg) {
 
-                    otpMsg.innerHTML = `OTP sent to ${data.email}. Code: <strong class="text-amber-900 dark:text-amber-200">${data.otp_code}</strong>`;
+                    otpMsg.innerHTML = `OTP sent to ${data.email}. Please check your inbox.`;
 
                 }
 
@@ -4034,13 +4034,13 @@ function togglePasswordEdit() {
 
                 if (codeInput) {
 
-                    codeInput.value = data.otp_code || '';
+                    codeInput.value = '';
 
                     codeInput.focus();
 
                 }
 
-                showToast(`Verification code sent: ${data.otp_code}`, 'success');
+                showToast(`Verification code sent to your mobile.`, 'success');
 
             } catch (err) {
 
@@ -6802,7 +6802,7 @@ function openDisableAccountModal() {
 
                                 <span class="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Your Code:</span>
 
-                                <span class="font-mono text-sm font-black text-amber-900 dark:text-amber-200 bg-amber-100 dark:bg-amber-900/60 px-2.5 py-0.5 rounded border border-amber-300 dark:border-amber-700 tracking-widest">${data.otp_code}</span>
+                                <span class="text-xs text-amber-800 dark:text-amber-300 font-bold">Check your email inbox</span>
 
                             </div>
 
@@ -6824,7 +6824,7 @@ function openDisableAccountModal() {
 
                 if (codeInput) {
 
-                    codeInput.value = data.otp_code || '';
+                    codeInput.value = '';
 
                     codeInput.focus();
 
@@ -6832,7 +6832,7 @@ function openDisableAccountModal() {
 
 
 
-                showToast(`✓ Verification code: ${data.otp_code} (Sent to ${data.channel})`);
+                showToast(`✓ Verification code sent to ${data.masked_target || data.channel}. Please check your inbox.`);
 
             } catch (err) {
 
