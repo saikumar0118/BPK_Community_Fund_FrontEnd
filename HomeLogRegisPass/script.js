@@ -1219,19 +1219,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             // Render clear visual feedback with the OTP code
-
-            if (targetMsgId && data.otp) {
-
+            if (targetMsgId) {
                 const msgElem = document.getElementById(targetMsgId);
-
                 if (msgElem) {
-
-                    msgElem.innerHTML = `Your OTP Code is: <span class="bg-amber-500/20 text-[#eea220] border border-amber-500/40 font-mono font-black text-sm px-2 py-0.5 rounded-lg tracking-widest">${data.otp}</span> (Auto-filled)`;
-
-                    msgElem.className = "text-xs font-semibold mt-1 flex items-center gap-1.5 text-emerald-400";
-
+                    if (data.otp) {
+                        msgElem.innerHTML = `Your OTP Code is: <span class="bg-amber-500/20 text-[#eea220] border border-amber-500/40 font-mono font-black text-sm px-2 py-0.5 rounded-lg tracking-widest">${data.otp}</span> (Auto-filled)`;
+                        msgElem.className = "text-xs font-semibold mt-1 flex items-center gap-1.5 text-emerald-400";
+                    } else {
+                        msgElem.innerHTML = `📬 4-digit code sent to your email! Please check your inbox and enter the OTP below.`;
+                        msgElem.className = "text-xs font-semibold mt-1 flex items-center gap-1.5 text-amber-400";
+                    }
                 }
-
             }
 
 
