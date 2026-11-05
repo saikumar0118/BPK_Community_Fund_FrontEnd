@@ -1200,39 +1200,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-            // Auto-fill the 4 OTP input boxes with the generated code
+            // For Email OTP: NEVER autofill and NEVER display code on screen! Must be manually entered from inbox.
+            const isEmailField = (fieldId === 'memberEmail' || fieldId === 'adminEmail');
 
-            if (data.otp && targetClass) {
-
-                const otpStr = String(data.otp);
-
+            // Clear boxes for manual typing
+            if (targetClass) {
                 const boxes = document.querySelectorAll('.' + targetClass);
-
-                boxes.forEach((b, idx) => {
-
-                    b.value = otpStr[idx] || '';
-
-                });
-
+                boxes.forEach((b) => { b.value = ''; });
             }
 
+            // Only autofill for Phone/SMS if code is returned
+            if (!isEmailField && data.otp && targetClass) {
+                const otpStr = String(data.otp);
+                const boxes = document.querySelectorAll('.' + targetClass);
+                boxes.forEach((b, idx) => {
+                    b.value = otpStr[idx] || '';
+                });
+            }
 
-
-            // Render clear visual feedback with the OTP code
+            // Render clear visual feedback
             if (targetMsgId) {
                 const msgElem = document.getElementById(targetMsgId);
                 if (msgElem) {
-                    if (data.otp) {
-                        msgElem.innerHTML = `Your OTP Code is: <span class="bg-amber-500/20 text-[#eea220] border border-amber-500/40 font-mono font-black text-sm px-2 py-0.5 rounded-lg tracking-widest">${data.otp}</span> (Auto-filled)`;
-                        msgElem.className = "text-xs font-semibold mt-1 flex items-center gap-1.5 text-emerald-400";
+                    if (isEmailField) {
+                        if (data.error) {
+                            msgElem.innerHTML = `⚠️ ${data.message || 'Email delivery failed. Please check your credentials.'}`;
+                            msgElem.className = "text-xs font-semibold mt-1 flex items-center gap-1.5 text-rose-400";
+                        } else {
+                            msgElem.innerHTML = `📬 4-digit code sent to your email! Please check your inbox and enter the OTP below.`;
+                            msgElem.className = "text-xs font-semibold mt-1 flex items-center gap-1.5 text-emerald-400";
+                        }
                     } else {
-                        msgElem.innerHTML = `📬 4-digit code sent to your email! Please check your inbox and enter the OTP below.`;
-                        msgElem.className = "text-xs font-semibold mt-1 flex items-center gap-1.5 text-amber-400";
+                        if (data.otp) {
+                            msgElem.innerHTML = `Your SMS OTP Code is: <span class="bg-amber-500/20 text-[#eea220] border border-amber-500/40 font-mono font-black text-sm px-2 py-0.5 rounded-lg tracking-widest">${data.otp}</span> (Auto-filled)`;
+                            msgElem.className = "text-xs font-semibold mt-1 flex items-center gap-1.5 text-emerald-400";
+                        }
                     }
                 }
             }
-
-
 
             let timeLeft = 30;
 
